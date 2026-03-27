@@ -2,6 +2,6 @@
 <odoo noupdate="1">
     <record id="hr_recruitment_stage_ai_interview" model="hr.recruitment.stage">
         <field name="name">AI Interview</field>
-        <field name="sequence">70</field>
+        <field name="sequence">15</field>
     </record>
 </odoo>

@@ -8,9 +8,9 @@
             <xpath expr="//header" position="inside">
                 <button name="action_send_ai_survey"
                         type="object"
-                        string="Send AI Survey"
+                        string="Send AI Interview"
                         class="oe_highlight"
-                        invisible="not ai_survey_id and not ai_cv_processed"/>
+                        invisible="False"/>
             </xpath>
             <xpath expr="//sheet//group" position="after">
                 <group string="AI Evaluation">
