@@ -252,11 +252,30 @@ class HrApplicant(models.Model):
     def _get_or_create_ai_stage(self):
         stage = self.env.ref('hr_recruitment_ai_interview.hr_recruitment_stage_ai_interview', raise_if_not_found=False)
         if stage:
+            desired_sequence = self._get_ai_interview_sequence()
+            if desired_sequence and stage.sequence != desired_sequence:
+                stage.sequence = desired_sequence
             return stage
+        desired_sequence = self._get_ai_interview_sequence() or 70
         return self.env['hr.recruitment.stage'].sudo().create({
             'name': _('AI Interview'),
-            'sequence': 70,
+            'sequence': desired_sequence,
         })
+
+    def _get_ai_interview_sequence(self):
+        qualification_stage = self.env['hr.recruitment.stage'].sudo().search([
+            ('name', 'ilike', 'Qualification'),
+        ], order='sequence asc', limit=1)
+        if not qualification_stage:
+            return False
+        next_stage = self.env['hr.recruitment.stage'].sudo().search([
+            ('sequence', '>', qualification_stage.sequence),
+        ], order='sequence asc', limit=1)
+        if not next_stage:
+            return qualification_stage.sequence + 1
+        if next_stage.sequence - qualification_stage.sequence > 1:
+            return qualification_stage.sequence + 1
+        return qualification_stage.sequence
 
     def _ai_finalize_evaluation(self):
         for applicant in self:
