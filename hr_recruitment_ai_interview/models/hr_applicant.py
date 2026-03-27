@@ -94,8 +94,9 @@ class HrApplicant(models.Model):
                     return base64.b64decode(attachment.datas).decode('utf-8', errors='ignore')
                 except Exception as err:
                     _logger.debug('Unable to decode text attachment %s: %s', attachment.id, err)
-        if self.description:
-            return html2plaintext(self.description)
+        description_field = 'description' if 'description' in self._fields else False
+        if description_field and self[description_field]:
+            return html2plaintext(self[description_field])
         return False
 
     def _looks_like_cv(self, attachment):
