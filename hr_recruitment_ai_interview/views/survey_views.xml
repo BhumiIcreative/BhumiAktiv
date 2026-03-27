@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="survey_question_answer_view_form_ai_weight" model="ir.ui.view">
+        <field name="name">survey.question.answer.form.ai.weight</field>
+        <field name="model">survey.question.answer</field>
+        <field name="inherit_id" ref="survey.survey_question_answer_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='value']" position="after">
+                <field name="ai_weight"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="survey_question_answer_view_tree_ai_weight" model="ir.ui.view">
+        <field name="name">survey.question.answer.tree.ai.weight</field>
+        <field name="model">survey.question.answer</field>
+        <field name="inherit_id" ref="survey.survey_question_answer_view_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='value']" position="after">
+                <field name="ai_weight"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

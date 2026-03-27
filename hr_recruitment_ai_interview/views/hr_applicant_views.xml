@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="view_hr_applicant_form_ai_inherit" model="ir.ui.view">
+        <field name="name">hr.applicant.form.ai.interview</field>
+        <field name="model">hr.applicant</field>
+        <field name="inherit_id" ref="hr_recruitment.hr_applicant_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//header" position="inside">
+                <button name="action_send_ai_survey"
+                        type="object"
+                        string="Send AI Interview"
+                        class="oe_highlight"
+                        invisible="False"/>
+            </xpath>
+            <xpath expr="//sheet//group" position="after">
+                <group string="AI Evaluation">
+                    <group>
+                        <field name="ai_cv_score"/>
+                        <field name="ai_survey_score"/>
+                        <field name="ai_total_score"/>
+                    </group>
+                    <group>
+                        <field name="ai_survey_id"/>
+                        <field name="ai_survey_input_id"/>
+                        <field name="ai_cv_processed"/>
+                    </group>
+                    <field name="ai_summary"/>
+                    <field name="ai_recommendation"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+</odoo>
